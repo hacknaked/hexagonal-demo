@@ -32,26 +32,40 @@ Web api listening on port 3000 ...
 
 Create a few companies:
 
+
 ```
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"name": "CompanyA", "cuit": "20-11111111-0", "createdAt": "2024-02-01T00:00:00Z"}' \
+  -d '{"name": "CompanyA", "cuit": "20-11111111-0", "createdAt": "2024-01-01T00:00:00Z"}' \
   http://localhost:3000/api/company
 ```
 ```
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"name": "CompanyB", "cuit": "20-22222222-0"}' \
+  -d '{"name": "CompanyB", "cuit": "20-22222222-0", "createdAt": "2024-02-01T00:00:00Z"}' \
+  http://localhost:3000/api/company
+```
+```
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"name": "CompanyC", "cuit": "20-33333333-0"}' \
   http://localhost:3000/api/company
   
 ```
 
-Create a transfer:
+Create some transfers:
 
 ```
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"amount": 1299.99, "companyId": 1, "debitAccount": "111-111111/1", "creditAccount": "222-222222/2", "createdAt": "2024-02-02T00:00:00Z" }' \
+  http://localhost:3000/api/transfer
+```
+
+```
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"amount": 1.04, "companyId": 2, "debitAccount": "222-222222/2", "creditAccount": "333-333333/3" }' \
   http://localhost:3000/api/transfer
 ```
 
@@ -62,3 +76,16 @@ curl -X POST \
 ```
 GET http://localhost:3000/api/company
 ```
+
+### Get the companies that joined in the last month (Feb 2024)
+
+```
+GET http://localhost:3000/api/company?filter=createdAt,gte,2024-02&filter=createdAt,lt,2024-03
+```
+
+### Get companies that made transfers in the last month
+
+```
+GET http://localhost:3000/api/company?filter=transfer,some,createdAt,gte,2024-02&filter=transfer,some,createdAt,lt,2024-03
+```
+
