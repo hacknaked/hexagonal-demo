@@ -8,6 +8,7 @@
   "main": "src/main.ts",
   "scripts": {
     "build": "tsc",
+    "syncdb": "npx prisma migrate deploy",
     "dev": "node --env-file=.env --watch -r ts-node/register src/main.ts",
     "lint": "eslint . --ext .ts --fix",
     "prettier": "prettier --config .prettierrc '**/*.ts' --write",
