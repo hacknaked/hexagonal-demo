@@ -165,7 +165,6 @@ describe('dbService', () => {
     const gte = new QueryFilter('createdAt', 'gte', '2024-01-01T00:00:00Z')
     const lte = new QueryFilter('createdAt', 'lte', '2024-12-31T23:59:59Z')
     const result = await companyService.findMany([gte, lte])
-    console.log(result)
     expect(result.length).toBe(companies.length - 2)
     const year2024 = new Date('2024-01-01T00:00:00Z')
     for (let i = 0; i < result.length; i++) {
